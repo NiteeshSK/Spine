@@ -1,0 +1,152 @@
+{
+  "n": 800,
+  "json_valid_strict": 0.65625,
+  "json_valid_lenient": 1.0,
+  "needed_repair": 0.34375,
+  "schema_valid": 0.58375,
+  "exact_match": 0.165,
+  "status_accuracy": 0.8175,
+  "refusal_precision": 0.524390243902439,
+  "refusal_recall": 0.5584415584415584,
+  "refusal_f1": 0.540880503144654,
+  "missed_abstain_rate": 0.44155844155844154,
+  "over_abstain_rate": 0.12074303405572756,
+  "refusal_correctness": 0.42207792207792205,
+  "field_accuracy": {
+    "device_hostname": 1.0,
+    "vendor": 1.0,
+    "site": 0.9454225352112676,
+    "event_type": 1.0,
+    "severity": 0.7288732394366197,
+    "started_at": 0.6320422535211268,
+    "ticket_id": 0.9507042253521126,
+    "affected_clients": 0.977112676056338,
+    "action_required": 1.0,
+    "interfaces": 0.9295774647887324
+  },
+  "macro_field_accuracy": 0.9163732394366197,
+  "field_scored_coverage": 0.8792569659442725,
+  "interface_precision": 1.0,
+  "interface_recall": 0.8153153153153153,
+  "interface_f1": 0.8982630272952854,
+  "grounding_rate": 0.5387323943661971,
+  "parse_modes": {
+    "strict": 525,
+    "fenced": 275
+  },
+  "top_schema_errors": [
+    "hallucinated fields",
+    "missing fields",
+    "started_at must match YYYY-MM-DDTHH"
+  ],
+  "tag": "demo_base",
+  "split": "test",
+  "model": "SIMULATED::base",
+  "examples_per_second": null,
+  "slices": {
+    "style": {
+      "abstain": {
+        "n": 154,
+        "exact_match": 0.42207792207792205,
+        "schema_valid": 1.0
+      },
+      "chat": {
+        "n": 158,
+        "exact_match": 0.12658227848101267,
+        "schema_valid": 0.5189873417721519
+      },
+      "email": {
+        "n": 173,
+        "exact_match": 0.07514450867052024,
+        "schema_valid": 0.4682080924855491
+      },
+      "syslog": {
+        "n": 153,
+        "exact_match": 0.13071895424836602,
+        "schema_valid": 0.5032679738562091
+      },
+      "ticket": {
+        "n": 162,
+        "exact_match": 0.08641975308641975,
+        "schema_valid": 0.4506172839506173
+      }
+    },
+    "event_type": {
+      "auth_failure": {
+        "n": 43,
+        "exact_match": 0.06976744186046512,
+        "schema_valid": 0.4883720930232558
+      },
+      "bgp_peer_down": {
+        "n": 52,
+        "exact_match": 0.09615384615384616,
+        "schema_valid": 0.4230769230769231
+      },
+      "config_change": {
+        "n": 46,
+        "exact_match": 0.10869565217391304,
+        "schema_valid": 0.5652173913043478
+      },
+      "cpu_high": {
+        "n": 44,
+        "exact_match": 0.06818181818181818,
+        "schema_valid": 0.4772727272727273
+      },
+      "fan_failure": {
+        "n": 51,
+        "exact_match": 0.1568627450980392,
+        "schema_valid": 0.5098039215686274
+      },
+      "link_down": {
+        "n": 49,
+        "exact_match": 0.02040816326530612,
+        "schema_valid": 0.32653061224489793
+      },
+      "link_flap": {
+        "n": 36,
+        "exact_match": 0.1388888888888889,
+        "schema_valid": 0.5833333333333334
+      },
+      "memory_high": {
+        "n": 39,
+        "exact_match": 0.1794871794871795,
+        "schema_valid": 0.6410256410256411
+      },
+      "none": {
+        "n": 154,
+        "exact_match": 0.42207792207792205,
+        "schema_valid": 1.0
+      },
+      "ospf_adjacency_down": {
+        "n": 43,
+        "exact_match": 0.09302325581395349,
+        "schema_valid": 0.46511627906976744
+      },
+      "packet_loss": {
+        "n": 51,
+        "exact_match": 0.058823529411764705,
+        "schema_valid": 0.47058823529411764
+      },
+      "psu_failure": {
+        "n": 56,
+        "exact_match": 0.05357142857142857,
+        "schema_valid": 0.5
+      },
+      "stack_split": {
+        "n": 44,
+        "exact_match": 0.18181818181818182,
+        "schema_valid": 0.5227272727272727
+      },
+      "stp_loop": {
+        "n": 49,
+        "exact_match": 0.14285714285714285,
+        "schema_valid": 0.5102040816326531
+      },
+      "temperature_high": {
+        "n": 43,
+        "exact_match": 0.11627906976744186,
+        "schema_valid": 0.3488372093023256
+      }
+    }
+  }
+}

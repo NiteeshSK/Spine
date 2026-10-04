@@ -1,0 +1,5 @@
+# Everything needed to generate data, run the audit, score predictions,
+# build figures and run the test suite -- with no CUDA and no model download.
+PyYAML>=6.0
+matplotlib>=3.8.0
+pytest>=8.0.0

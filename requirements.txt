@@ -1,0 +1,18 @@
+# Core training stack (GPU). Pinned to a window known to work together;
+# TRL's API moved a lot in 2025, so loosen these deliberately, not by accident.
+torch>=2.4.0
+transformers>=4.51.0
+trl>=0.15.0
+peft>=0.14.0
+accelerate>=1.2.0
+datasets>=3.2.0
+bitsandbytes>=0.45.0          # 4-bit NF4 quantization; CUDA only
+sentencepiece>=0.2.0
+PyYAML>=6.0
+
+# Fast batched eval (optional but ~10x on the 800-row test split)
+# vllm>=0.7.0
+
+# Analysis / figures / tests -- all pure CPU
+matplotlib>=3.8.0
+pytest>=8.0.0

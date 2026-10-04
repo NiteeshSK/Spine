@@ -1,0 +1,197 @@
+{
+  "splits": [
+    {
+      "split": "train",
+      "n_in": 6000,
+      "n_kept": 6000,
+      "n_dropped": 0,
+      "near_duplicate_pairs_in_sample": 0,
+      "label_distribution": {
+        "incident": 4980,
+        "no_incident": 1020
+      },
+      "style_distribution": {
+        "ticket": 1242,
+        "syslog": 1278,
+        "email": 1255,
+        "chat": 1205,
+        "abstain": 1020
+      },
+      "event_distribution": {
+        "auth_failure": 364,
+        "stp_loop": 323,
+        "ospf_adjacency_down": 355,
+        "config_change": 342,
+        "none": 1020,
+        "fan_failure": 394,
+        "psu_failure": 392,
+        "temperature_high": 377,
+        "link_flap": 339,
+        "bgp_peer_down": 302,
+        "cpu_high": 410,
+        "stack_split": 330,
+        "link_down": 357,
+        "memory_high": 358,
+        "packet_loss": 337
+      },
+      "problems_sample": [],
+      "n_problems": 0
+    },
+    {
+      "split": "val",
+      "n_in": 500,
+      "n_kept": 500,
+      "n_dropped": 0,
+      "near_duplicate_pairs_in_sample": 1,
+      "label_distribution": {
+        "no_incident": 83,
+        "incident": 417
+      },
+      "style_distribution": {
+        "abstain": 83,
+        "email": 96,
+        "syslog": 97,
+        "chat": 119,
+        "ticket": 105
+      },
+      "event_distribution": {
+        "none": 83,
+        "cpu_high": 35,
+        "link_flap": 39,
+        "config_change": 21,
+        "bgp_peer_down": 28,
+        "stack_split": 27,
+        "link_down": 25,
+        "fan_failure": 31,
+        "ospf_adjacency_down": 27,
+        "memory_high": 33,
+        "temperature_high": 23,
+        "psu_failure": 38,
+        "packet_loss": 34,
+        "stp_loop": 28,
+        "auth_failure": 28
+      },
+      "problems_sample": [],
+      "n_problems": 0,
+      "dropped_overlapping_train": 15
+    },
+    {
+      "split": "test",
+      "n_in": 800,
+      "n_kept": 800,
+      "n_dropped": 0,
+      "near_duplicate_pairs_in_sample": 0,
+      "label_distribution": {
+        "incident": 646,
+        "no_incident": 154
+      },
+      "style_distribution": {
+        "ticket": 162,
+        "chat": 158,
+        "abstain": 154,
+        "syslog": 153,
+        "email": 173
+      },
+      "event_distribution": {
+        "link_down": 49,
+        "ospf_adjacency_down": 43,
+        "none": 154,
+        "fan_failure": 51,
+        "auth_failure": 43,
+        "bgp_peer_down": 52,
+        "stp_loop": 49,
+        "link_flap": 36,
+        "cpu_high": 44,
+        "packet_loss": 51,
+        "memory_high": 39,
+        "temperature_high": 43,
+        "config_change": 46,
+        "psu_failure": 56,
+        "stack_split": 44
+      },
+      "problems_sample": [],
+      "n_problems": 0,
+      "dropped_overlapping_train": 0
+    },
+    {
+      "split": "ood",
+      "n_in": 300,
+      "n_kept": 300,
+      "n_dropped": 0,
+      "near_duplicate_pairs_in_sample": 0,
+      "label_distribution": {
+        "incident": 243,
+        "no_incident": 57
+      },
+      "style_distribution": {
+        "handoff": 113,
+        "cli": 130,
+        "abstain": 57
+      },
+      "event_distribution": {
+        "bgp_peer_down": 17,
+        "config_change": 20,
+        "fan_failure": 20,
+        "none": 57,
+        "psu_failure": 18,
+        "packet_loss": 19,
+        "link_flap": 19,
+        "stack_split": 15,
+        "auth_failure": 16,
+        "memory_high": 31,
+        "temperature_high": 10,
+        "ospf_adjacency_down": 14,
+        "stp_loop": 14,
+        "cpu_high": 15,
+        "link_down": 15
+      },
+      "problems_sample": [],
+      "n_problems": 0,
+      "dropped_overlapping_train": 0
+    },
+    {
+      "split": "pool",
+      "n_in": 1500,
+      "n_kept": 1500,
+      "n_dropped": 0,
+      "near_duplicate_pairs_in_sample": 1,
+      "label_distribution": {
+        "incident": 1203,
+        "no_incident": 297
+      },
+      "style_distribution": {
+        "email": 298,
+        "chat": 281,
+        "syslog": 319,
+        "abstain": 297,
+        "ticket": 305
+      },
+      "event_distribution": {
+        "auth_failure": 82,
+        "link_down": 91,
+        "packet_loss": 94,
+        "stack_split": 93,
+        "config_change": 98,
+        "temperature_high": 92,
+        "stp_loop": 83,
+        "none": 297,
+        "ospf_adjacency_down": 74,
+        "psu_failure": 89,
+        "link_flap": 86,
+        "cpu_high": 88,
+        "fan_failure": 89,
+        "bgp_peer_down": 70,
+        "memory_high": 74
+      },
+      "problems_sample": [],
+      "n_problems": 0,
+      "dropped_overlapping_train": 34
+    }
+  ],
+  "leakage": {
+    "train_vs_val": 0,
+    "train_vs_test": 0,
+    "train_vs_ood": 0,
+    "train_vs_pool": 0
+  }
+}
