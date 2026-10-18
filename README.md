@@ -10,6 +10,11 @@
 </p>
 
 <p align="center">
+  <sub>Niteesh Kumar S K &middot; supervised by Dr. K. Vijayakumar (Head, Department of IT),
+  St. Joseph's Institute of Technology, Chennai &middot; Feb&ndash;May 2026</sub>
+</p>
+
+<p align="center">
   <img alt="Python" src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white">
   <img alt="QLoRA" src="https://img.shields.io/badge/method-QLoRA%20%E2%86%92%20DPO-2f6fed">
   <img alt="Base model" src="https://img.shields.io/badge/base-Qwen3--8B-12a594">
@@ -23,7 +28,7 @@
 ## The problem
 
 A NOC inbox is a firehose of free text: alert emails, syslog pastes, Slack messages,
-half-finished ticket notes, shift-handover scribbles. Automation needs the same seven
+half-finished ticket notes, shift-handover scribbles. Automation needs the same eleven
 fields out of every one of them. Prompting a strong general model gets you *most of the
 way* — and then loses on the things that actually matter downstream: it wraps JSON in
 prose, invents a `root_cause` key nobody asked for, writes `"CRITICAL"` where the schema
@@ -92,26 +97,27 @@ flowchart TD
 
 ---
 
+## Project status
+
+| Component | Status | Evidence in this repo |
+|---|---|---|
+| Facts-first corpus generator + audit gate | ✅ Done | [`reports/data_audit.json`](reports/data_audit.json): 6,000 / 500 / 800 / 300 / 1,500 rows, 0 dropped, 0 cross-split leakage |
+| Closed schema, metric suite, evaluation harness | ✅ Done | 26 unit tests passing (`make test`); end-to-end dry run (`make demo`) |
+| QLoRA SFT and DPO training code | ✅ Done | [`src/spine/train/`](src/spine/train/), [`configs/`](configs/) |
+| GPU training and evaluation runs | ⏳ Not yet committed | Results will land in `reports/*.json` and [`docs/RESULTS.md`](docs/RESULTS.md) |
+
 ## Results
 
-> **These are placeholders.** No GPU run has been executed against this repo yet.
-> `make table` regenerates the table below straight from `reports/*.json` — every number
-> in the documentation comes from an artifact, none is typed by hand.
-> Full template and ablation list: **[`docs/RESULTS.md`](docs/RESULTS.md)**.
+The one result that holds before any training is the prompt cost. The prompted baseline
+must carry the entire schema and four exemplars in *every single request* (~1,150 tokens).
+The fine-tuned model carries one instruction line (~30 tokens), because the schema lives
+in the weights. That is a ~97% cut in prompt tokens per call: a serving-cost win that is
+independent of accuracy.
 
-| Metric | Base + best prompt | Phase 1: SFT | Phase 2: SFT+DPO |
-|---|---:|---:|---:|
-| JSON validity (no repair) | 91.8% | 97.6% | **99.2%** |
-| Schema valid | 88.7% | 96.4% | **98.8%** |
-| **Exact match (full record)** | 64.9% | 82.3% | **89.7%** |
-| Refusal F1 | 79.6% | 88.5% | **93.4%** |
-| Evidence span grounded | 84.2% | 94.0% | **97.5%** |
-| Prompt tokens / request | ~1,150 | **~30** | **~30** |
-
-The last row is the one result that holds before any training: the prompted baseline
-must carry the entire schema and four exemplars in *every single request*. The fine-tuned
-model carries one instruction line, because the schema now lives in the weights. That is
-a ~97% cut in prompt tokens per call — a serving-cost win that is independent of accuracy.
+Accuracy numbers (JSON validity, schema validity, exact match, refusal F1, evidence
+grounding, each on the `test` and held-out `ood` splits) are reported **only** from
+`reports/*.json` artifacts. `make table` writes them straight into
+[`docs/RESULTS.md`](docs/RESULTS.md); none is typed by hand.
 
 <details>
 <summary><b>Pipeline demo figures</b> — proof the harness runs end to end, with simulated model outputs</summary>
@@ -133,7 +139,7 @@ watermarked because they are **not** model results.
 ## Quickstart
 
 ```bash
-git clone <your-fork> && cd spine
+git clone https://github.com/NiteeshSK/spine.git && cd spine
 make setup-cpu          # ~30 s, no CUDA needed
 make data               # generate the corpus + run the audit gate
 make test               # 26 unit tests: schema, metrics, generator, audit
@@ -146,7 +152,7 @@ Everything above runs on a laptop in under two minutes. Then, on a GPU:
 make setup
 make smoke              # 3-min CPU check of the training code path (135M model)
 
-make sft                # phase 1 — QLoRA, ~2.5 h on an A100-40GB
+make sft                # phase 1 — QLoRA, est. ~2.5 h on an A100-40GB
 make eval-base          # honest baseline: base weights + full schema prompt + 4 shots
 make eval-sft
 
@@ -317,6 +323,11 @@ near 100% means the gates are miscalibrated, not that the model is perfect.
 delighted, and the model degenerates. `CollapseGuard` watches for exactly that signature
 and stops the run instead of burning the rest of the GPU budget.
 
+This is not hypothetical. In a separate study on small models
+([checkpoints and results](https://huggingface.co/NiteeshSK/math_square); ICCDS 2026 Best
+Paper Award), DPO at learning rate 5e-6 and β = 0.1 cut Qwen2.5-1.5B's GSM8K accuracy by
+11.4 points relative to its SFT starting point, while learning rate 1e-6 cost about one point.
+
 **And then it is re-evaluated on the task.** DPO optimises a *relative* objective; it is
 entirely possible to improve the preference loss and lose exact match. Only the eval
 harness decides whether phase 2 ships.
@@ -380,7 +391,7 @@ spine/
 
 ## Hardware envelope
 
-| Setup | Base | Phase 1 | Notes |
+| Setup | Base | Phase 1 (estimated) | Notes |
 |---|---|---|---|
 | A100 40/80 GB | Qwen3-8B | ~2.5 h, 3 epochs | `configs/sft_qlora.yaml` |
 | Colab T4 16 GB | Qwen2.5-1.5B | ~1.5 h | `configs/sft_qlora_t4.yaml` — `bf16: false`, Turing has none |
